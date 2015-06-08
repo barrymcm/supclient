@@ -1,0 +1,6 @@
+{
+	"environment" : "development",
+	"serviceEndpoints" : [
+		"url" : "http://www.troff.com",
+	]
+}
