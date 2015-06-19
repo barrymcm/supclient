@@ -16,9 +16,8 @@ class UserController
     public function listAction(Request $request)
     {
     	$app = new Application();
-    	// $methods = get_class_methods($request);
-
-    	return $app['twig']->render('user.html.twig', array());
+    
+        return $app['twig']->render('user.html.twig', array());
     }
 
     /**
@@ -27,9 +26,10 @@ class UserController
      */
     public function showAction(Request $request)
     {
-    	$app = new Application();
-    	// $methods = get_class_methods($request);
-		$name = $request->get('name');
+        $app = new Application();
+        // $methods = get_class_methods($request);
+        $name = $request->get('name');
+
 
     	return $app['twig']->render('user.html.twig', array(
     		'name' => $name

@@ -4,8 +4,11 @@ namespace Dev\Pub;
 
 use Dev\Pub\Providers\GlobalControllerProvider;
 use Dev\Pub\Providers\HelloServiceProvider;
-use Silex\Provider\TwigServiceProvider;
+use Dev\Pub\Providers\ConfigProvider;
 use Silex\Application as SilexApplication;
+use Silex\Provider\TwigServiceProvider;
+use Dev\Pub\Resources\ApiResource;
+use Dev\Pub\Providers\GlobalServiceProvider;
 
 class Application extends SilexApplication
 {
@@ -14,39 +17,42 @@ class Application extends SilexApplication
  		parent::__construct($values);
  		
  		$app = $this;
- 		$this->mountControllers($app);
- 		$this->mountServiceProviders($app);
- 
+
+ 		$this->loadControllers($app);
+ 		$this->loadExternalProviders($app);
+		$this->loadInternalServices($app);
+		$this->loadApiResources($app);
+
  		return $app;
  	}
  	
  	private function rootPath($path)
  	{
- 		$app['config.root'] = __DIR__.'/'.$path;
- 		return $app['config.root'];
+ 		return $app['root.directory'] = __DIR__.'/'.$path;
  	}
  
- 	private function mountControllers(Application $app)
+ 	private function loadControllers(Application $app)
  	{
  		$app->mount('/', new GlobalControllerProvider());
  	}
+
+ 	private function loadInternalServices(Application $app)
+ 	{
+ 		$app->register(new GlobalServiceProvider());
+ 	}
  
- 	private function mountServiceProviders(Application $app)
+ 	private function loadExternalProviders(Application $app)
  	{
  		$app->register(new TwigServiceProvider(), array(
- 			'twig.path' => $this->rootPath('views')
+ 			'twig.path' => $this->rootPath('Views/')
  		));
  	}
 
- 	private function createApiEndpoint(Application $app)
+ 	public function loadApiResources(Application $app)
  	{
- 		$app['api.troff'] = $app->share(function() use ($app){
-	            $apiEndpoint = new Config();
-	            return $apiConfig->load($app['config.root'] . '/config.xml');
-	        });
- 		});
-        $app['config.root'] = CONFIG_ROOT;
-    }
-
+ 		$app->register(new ApiResource());
  	}
 }
+
+
+
