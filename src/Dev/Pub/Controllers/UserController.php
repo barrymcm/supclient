@@ -3,21 +3,28 @@
 namespace Dev\Pub\Controllers;
 
 use Dev\Pub\Application;
+use Dev\Pub\Controllers\ApplicationController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class UserController
+class UserController extends ApplicationController
 {
 	/**
 	 * [listAction description]
 	 * @param  Request
 	 * @return [type]
 	 */
-    public function listAction(Request $request)
+    public function listAction()
     {
     	$app = new Application();
+
+        // Need to create a function that builds the url and 
+        // sends the request [see hbo client]
+        $response = $this->get('user');
+
+        echo 11111;
     
-        return $app['twig']->render('user.html.twig', array());
+        return $app['twig']->render('user/user.html.twig', array());
     }
 
     /**
@@ -27,14 +34,11 @@ class UserController
     public function showAction(Request $request)
     {
         $app = new Application();
-        // $methods = get_class_methods($request);
+        
         $name = $request->get('name');
-
-
-    	return $app['twig']->render('user.html.twig', array(
+    	return $app['twig']->render('user/user.html.twig', array(
     		'name' => $name
     	));
-
     }
 
     /**

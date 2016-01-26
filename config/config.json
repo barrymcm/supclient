@@ -1,6 +1,8 @@
 {
 	"environment" : "development",
-	"serviceEndpoints" : { 
-		"troff" : "http://www.troff.com" 
+	"serviceEndpoints" : {  
+		"troff" : "http://www.troff.com",
+		"8000" : "http://localhost:8000",
+		"3000" : "http://localhost:3000"
 	}
 }

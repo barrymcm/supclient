@@ -4,6 +4,9 @@ namespace Dev\Pub\Config;
 
 use Dev\Pub\Application;
 
+/**
+ * Application Service
+ */
 class Configuration
 {
 	/**
@@ -13,17 +16,22 @@ class Configuration
 	 */
 	private $config;
 
-	public function get($fileName)
+	public function get()
 	{
 		$args = func_get_args();
-		$path = $this->getConfigPath($args[0]);
-
-		foreach($args as $arg)
-		{
-			// Pass in the nodes to specify the api endpoint
-		}
+		$fileName = array_shift($args);
+		$configPath = $this->getConfigPath($fileName);
+		$params = $this->load($configPath, $args);
+		$endPoint = $params[$args[0]][$args[1]];
+		
+		return $endPoint;
 	}
 
+	/**
+	 * [getConfigPath description]
+	 * @param  [type] $fileName [description]
+	 * @return $path string           [description]
+	 */
 	private function getConfigPath($fileName)
  	{
  		switch ($fileName) 
@@ -31,21 +39,19 @@ class Configuration
  			case 'config.json' :
  				$path = CONFIG_ROOT.$fileName;
  				break;
- 			default :
- 				$path = "";
- 				break;	
  		}
  		return $path;
  	}
 
-	public function load($fileName)
+ 	/**
+ 	 * [load description]
+ 	 * @return array $params
+ 	 */
+	public function load($configPath, $args = array())
 	{
-		$configFile = $this->getConfigPath($fileName);
-		$contents = file_get_contents($configFile);	
-	 	$config = json_decode($contents, true);
+		$jsonVals = file_get_contents($configPath);	
+	 	$params = json_decode($jsonVals, true);
 
-	 	$config["serviceEndpoints"]["troff"]."<br/>";
-
-	 	return $config;
+	 	return $params;
 	}	
 }

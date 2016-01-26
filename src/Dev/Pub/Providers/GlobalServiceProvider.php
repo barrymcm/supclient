@@ -8,6 +8,11 @@ use Silex\ServiceProviderInterface;
 
 class GlobalServiceProvider implements ServiceProviderInterface
 {
+	/**
+	 * registers the applications services
+	 * @param  Application $app [description]
+	 * @return $app application containers
+	 */
 	public function register(Application $app)
 	{
 		$app['config'] = $app->share(function ($app) {
