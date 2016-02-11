@@ -18,7 +18,10 @@
         "symfony/expression-language": "~2.4",
         "doctrine/data-fixtures": "1.0.*",
 		"symfony/finder": "~2.6",
-        "twig/twig": "~1.8"
+        "twig/twig": "~1.8",
+        "symfony/twig-bridge": "~3.0",
+        "components/bootstrap" : "~3.3",
+		"components/bootstrap-default": "^3.3"
     },
     
     "require-dev": {

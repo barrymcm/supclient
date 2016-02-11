@@ -9,13 +9,14 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ApplicationController
 {
-    protected function get($params)
+    protected function get($params = null)
     {
     	$client = new Client();
     	$app = new Application();
-    	$request = $client->createRequest('GET', $app['endpoint.3000'].$params);
+    	
+    	$request = $client->createRequest('GET', $app['endpoint.3000'].'/'.$params);
     	$response = $client->send($request);
 
-    	return $response;
+    	return $response->json();
     }
 }

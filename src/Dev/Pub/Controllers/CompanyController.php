@@ -14,18 +14,13 @@ class CompanyController extends ApplicationController
 	 * @param  Request
 	 * @return [type]
 	 */
-    public function listAction()
+    public function listAction(Request $request)
     {
     	$app = new Application();
-        $response = $this->get('/companies');
 
-        if($response->getStatusCode() == 200) {
-            $companies = $response->json();
-        }
+        $companies = $this->get('companies');
 
-        print_r($companies);
-
-        return $app['twig']->render('company/companies.html.twig', array($companies));
+        return $app['twig']->render('company/companies.html.twig', $companies);
     }
 
     /**
