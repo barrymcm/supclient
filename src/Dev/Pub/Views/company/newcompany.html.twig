@@ -1,0 +1,20 @@
+{{ form_start(form)}}
+	{{ form_errors(form) }}
+	
+	{{ form_row(form.name, {'label': 'Name'}) }}
+	{{ form_row(form.country, {'label': 'Country'}) }}
+	{{ form_row(form.region, {'label': 'Region'}) }}
+	{{ form_row(form.city, {'label': 'City'}) }}
+	{{ form_row(form.street, {'label': 'Street'}) }}
+	{{ form_row(form.postCode, {'label': 'Post Code'}) }}
+	{{ form_row(form.regNo, {'label': 'Reg Number'}) }}
+	{{ form_row(form.website, {'label': 'Website'}) }}
+	{{ form_row(form.taxNo, {'label': 'Tax Number'}) }}
+
+	{{ form_row(form.submit) }}
+
+{{ form_end(form) }}
+
+{% for flash_message in app.session.flashbag.get('success') %}
+	{{ flash_message }}
+{% endfor %}

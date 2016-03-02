@@ -10,18 +10,21 @@
     ],
     
     "require": {
+        "components/bootstrap" : "~3.3",
+		"components/bootstrap-default": "^3.3",
         "doctrine/orm": "2.4.*",
-        "silex/silex" : "~1.2",
-        "phpunit/phpunit": "~4.4",
+        "doctrine/data-fixtures": "1.0.*",
         "guzzlehttp/guzzle": "~5.0",
+        "phpunit/phpunit": "~4.4",
+        "silex/silex" : "~1.2",
+        "symfony/form": "~2.3",
+        "symfony/security-csrf": "~2.3",
         "symfony/validator": "~2.4",
         "symfony/expression-language": "~2.4",
-        "doctrine/data-fixtures": "1.0.*",
-		"symfony/finder": "~2.6",
-        "twig/twig": "~1.8",
+        "symfony/finder": "^3.0",
         "symfony/twig-bridge": "~3.0",
-        "components/bootstrap" : "~3.3",
-		"components/bootstrap-default": "^3.3"
+        "twig/twig": "~1.8",
+		"symfony/config": "^3.0"
     },
     
     "require-dev": {

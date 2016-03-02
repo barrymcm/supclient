@@ -18,6 +18,7 @@ class GlobalControllerProvider implements ControllerProviderInterface
         // CompanyController
         $controllers->match('/companies', 'Dev\Pub\Controllers\CompanyController::listAction');
         $controllers->match('/company/{id}', 'Dev\Pub\Controllers\CompanyController::showAction');
+        $controllers->match('/company/add/new', 'Dev\Pub\Controllers\CompanyController::createAction');
 
         return $controllers;
     }

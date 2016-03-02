@@ -2,13 +2,17 @@
 
 namespace Dev\Pub;
 
-use Dev\Pub\Providers\GlobalControllerProvider;
-use Dev\Pub\Providers\HelloServiceProvider;
 use Dev\Pub\Providers\ConfigProvider;
-use Silex\Application as SilexApplication;
-use Silex\Provider\TwigServiceProvider;
 use Dev\Pub\Resources\ApiResource;
+use Dev\Pub\Providers\HelloServiceProvider;
 use Dev\Pub\Providers\GlobalServiceProvider;
+use Dev\Pub\Providers\GlobalControllerProvider;
+use Silex\Provider\FormServiceProvider;
+use Silex\Provider\TwigServiceProvider;
+use Silex\Application as SilexApplication;
+use Silex\Provider\ValidatorServiceProvider;
+use Silex\Provider\TranslationServiceProvider;
+use Silex\Provider\SessionServiceProvider;
 
 class Application extends SilexApplication
 {
@@ -68,9 +72,15 @@ class Application extends SilexApplication
  	 */
  	private function loadExternalProviders(Application $app)
  	{
+ 		$app->register(new TranslationServiceProvider(), array(
+    		'translator.messages' => array(),
+));
  		$app->register(new TwigServiceProvider(), array(
  			'twig.path' => $this->rootPath('Views/')
  		));
+ 		$app->register(new FormServiceProvider());
+ 		$app->register(new ValidatorServiceProvider());
+ 		$app->register(new SessionServiceProvider());
  	}
 
  	/**

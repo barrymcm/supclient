@@ -9,7 +9,7 @@ use Silex\ServiceProviderInterface;
 class GlobalServiceProvider implements ServiceProviderInterface
 {
 	/**
-	 * registers the applications services
+	 * registers the applications api services
 	 * @param  Application $app [description]
 	 * @return $app application containers
 	 */
