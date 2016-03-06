@@ -34,7 +34,7 @@ class CompanyController extends ApplicationController
         $app = new Application();
 
         $id = $request->get('id');
-        $company = $this->get('company/'.$id);
+        $company = $this->get("company/".$id);
     	return $app['twig']->render('company/company.html.twig', $company);
     }
 
@@ -51,8 +51,10 @@ class CompanyController extends ApplicationController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            $this->post($form->getData());
-            $app['session']->getFlashBag()->add('success', 'You have added a new company');
+            $result = $this->post('company/add/new', $request->getContent());
+            if($result) {    
+                $app['session']->getFlashBag()->add('success', 'You have added a new company');
+            }
         } else {
             $form->addError(new FormError('Error processing validation of the form!'));
         }

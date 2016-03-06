@@ -4,6 +4,7 @@ namespace Dev\Pub\Controllers;
 
 use GuzzleHttp\Client;
 use Dev\Pub\Application;
+use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -16,9 +17,9 @@ class ApplicationController
      */
     protected function get($params = null)
     {
-    	$client = new Client();
     	$app = new Application();
     	
+    	$client = new Client();
     	$request = $client->createRequest('GET', $app['endpoint.3000'].'/'.$params);
     	$response = $client->send($request);
 
@@ -30,12 +31,29 @@ class ApplicationController
      * @param  [type] $params [description]
      * @return [type]         [description]
      */
-    protected function post(array $body) 
+    protected function post($params = null, $body = null) 
     {
-    	$client = new Client();
     	$app = new Application();
 
-    	$r = $client->createRequest('POST', $app['endpoint.3000'], [$body]);
-    	return $r;
+    	/**
+    	 * @todo abstract the client object into a container
+    	 * @var Client
+    	 */
+    	$client = new Client();
+		
+		try {
+    		$response = $client->request("POST", $app['endpoint.3000'].'/'.$params, ["body" => $body]);
+    		
+    		// this could go into a test
+	    	$response->getStatusCode();
+	    	$response->hasHeader("Location");
+	    	$response->getbody(true);
+	    	return $response;
+    	} catch (RequestException $e) {
+    		echo $e->getRequest();
+    		if ($e->hasResponse()) {
+        		echo $e->getResponse();
+    		}
+		}   	
     }
 }

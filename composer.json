@@ -14,7 +14,7 @@
 		"components/bootstrap-default": "^3.3",
         "doctrine/orm": "2.4.*",
         "doctrine/data-fixtures": "1.0.*",
-        "guzzlehttp/guzzle": "~5.0",
+        "guzzlehttp/guzzle": "~6.0",
         "phpunit/phpunit": "~4.4",
         "silex/silex" : "~1.2",
         "symfony/form": "~2.3",
