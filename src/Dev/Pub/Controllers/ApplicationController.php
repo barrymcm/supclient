@@ -12,8 +12,8 @@ class ApplicationController
 {
     /**
      * [get description]
-     * @param  [type] $params [description]
-     * @return [type]         [description]
+     * @param  [string] $params [API route to send the request]
+     * @return [json]           [response object]
      */
     protected function get($params = null)
     {
@@ -28,15 +28,16 @@ class ApplicationController
 
     /**
      * [post description]
-     * @param  [type] $params [description]
-     * @return [type]         [description]
+     * @param  [string] $params [API route to send the request]
+     * @param  [object] $body   [request object contents]
+     * @return [object]         [response object with status code and resource uri]
      */
     protected function post($params = null, $body = null) 
     {
     	$app = new Application();
 
     	/**
-    	 * @todo abstract the client object into a container
+    	 * @todo abstract the Guzzle client object into a container
     	 * @var Client
     	 */
     	$client = new Client();

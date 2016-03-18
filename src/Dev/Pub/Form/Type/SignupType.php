@@ -1,28 +1,20 @@
-<?php
+<?php 
 
-namespace Dev\Pub\Form;
+namespace Dev\Pub\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class Company extends AbstractType 
+class SignupType extends AbstractType
 {
-
 	public function buildForm(FormBuilderInterface $formBuilder, array $options)
 	{
 		$formBuilder
-			->add('name', 'text')
-            ->add('country', 'text')
-            ->add('region', 'text')
-            ->add('city', 'text')
-            ->add('street', 'text')
-            ->add('postCode', 'text')
-            ->add('regNo', 'text')
-            ->add('taxNo', 'text')
-            ->add('website', 'text')
-            ->add('submit', 'submit', ['label' => 'Create']);
+			->add('email', 'text')	
+			->add('password', 'password')
+			->add('repeatPassword', 'password');
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver)
@@ -39,6 +31,6 @@ class Company extends AbstractType
 	 */
 	public function getName()
 	{
-		return 'new_company';
+		return 'login_details';
 	}
 }

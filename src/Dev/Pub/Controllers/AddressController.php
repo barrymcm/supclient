@@ -3,41 +3,14 @@
 namespace Dev\Pub\Controllers;
 
 use Dev\Pub\Application;
-use Dev\Pub\Form\Type\CompanyType;
+use Dev\Pub\Form\Company;
 use Symfony\Component\Form\FormError;
 use Dev\Pub\Controllers\ApplicationController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CompanyController extends ApplicationController
+class AddressController extends ApplicationController
 {
-	/**
-	 * [listAction description]
-	 * @param  Request
-	 * @return [type]
-	 */
-    public function listAction(Request $request)
-    {
-    	$app = new Application();
-
-        $companies = $this->get('companies');
-
-        return $app['twig']->render('company/companies.html.twig', $companies);
-    }
-
-    /**
-     * [showAction description]
-     * @return [type]
-     */
-    public function showAction(Request $request)
-    {
-        $app = new Application();
-
-        $id = $request->get('id');
-        $company = $this->get("company/".$id);
-    	return $app['twig']->render('company/company.html.twig', $company);
-    }
-
     /**
      * [createAction add a new company]
      * @param  Request $request [description]
@@ -47,16 +20,11 @@ class CompanyController extends ApplicationController
     {
         $app = new Application();
 
-        $form = $app['form.factory']->createBuilder(new CompanyType())->getForm();
+        $form = $app['form.factory']->createBuilder(new Address())->getForm();
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            
-            /**
-             * @todo send the email and password in the post request to the api
-             * but the passwords and email must be encrypted first
-             */
-            $result = $this->post('company/add/new', $request->getContent());
+            $result = $this->post('address/add/new', $request->getContent());
 
             if($result) {    
                 $app['session']->getFlashBag()->add('success', 'You have added a new company');
@@ -64,9 +32,6 @@ class CompanyController extends ApplicationController
         } else {
             $form->addError(new FormError('Error processing validation of the form!'));
         }
-
-        return $app['twig']->render('company/newcompany.html.twig', ['form' => $form->createView()]);
-
     }
 
     /**

@@ -18,11 +18,7 @@ class UserController extends ApplicationController
     {
     	$app = new Application();
 
-        // Need to create a function that builds the url and 
-        // sends the request [see hbo client]
         $response = $this->get('user');
-
-        echo 11111;
     
         return $app['twig']->render('user/user.html.twig', array());
     }
